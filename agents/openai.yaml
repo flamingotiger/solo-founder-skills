@@ -1,4 +1,4 @@
 interface:
   display_name: "Solo Founder"
-  short_description: "Keep product, design, engineering, and quality tradeoffs aligned"
-  default_prompt: "Use $solo-founder to evaluate this work through product, design, engineering, and quality lenses, then recommend the most pragmatic next step."
+  short_description: "Evaluate work through product, planning, design, engineering, and quality tradeoffs"
+  default_prompt: "Use $solo-founder to assess this request through product, planning, design, engineering, and quality lenses, then choose the most pragmatic next action."
