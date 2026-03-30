@@ -35,12 +35,12 @@ UI를 "예쁜가"가 아니라 "이해되는가, 믿을 수 있는가, 행동하
 
 ## 생성 시 적용 기준
 
-코드나 컴포넌트를 만들 때 references/design.md의 시각 디폴트를 적용한다.
+코드나 컴포넌트를 만들 때 ./references/design.md의 시각 디폴트를 적용한다.
 새 화면이나 큰 UI 변경이면 위 레퍼런스 활용 규칙을 먼저 적용한 뒤 시각 디폴트를 입힌다.
 
-- radius: 작게. 보이면 이미 과함
-- shadow: 얕게. 구조 보조용만
-- gradient: 브랜딩 구간에만
+- radius: 작게. 모서리만 살짝 둥글게.
+- shadow: 금지.
+- gradient: 금지.
 - color: neutral + key color 1개
 - card: 독립된 묶음에만
 - text: 설명 문단 최소화
