@@ -8,7 +8,7 @@ description: >
 compatibility: Claude Code, Codex CLI
 metadata:
   author: solo-founder
-  version: "2.1"
+  version: "2.2"
 ---
 
 # Solo Founder
@@ -21,25 +21,26 @@ metadata:
 
 ### 작업 유형별 로드 대상
 
-| 작업 유형                 | 로드할 파일                                                  |
-| ------------------------- | ------------------------------------------------------------ |
-| 단순 작업                 | 없음 (이 파일만으로 처리)                                    |
-| 기능 추가 / 우선순위 판단 | `references/planning.md` + `references/engineering.md`       |
-| UI / 화면 관련            | `references/design.md` + 필요 시 `references/engineering.md` |
-| 디버깅                    | `references/engineering.md` + `references/quality.md`        |
-| 전체 설계 / 아키텍처      | 4개 모두                                                     |
-| 릴리즈 / 배포 전 검토     | `references/quality.md` + `references/engineering.md`        |
+| 작업 유형                 | 로드할 파일                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| 단순 작업                 | 없음 (이 파일만으로 처리)                                                            |
+| 기능 추가 / 우선순위 판단 | `planning/references/planning.md` + `engineering/references/engineering.md`         |
+| UI / 화면 관련            | `design/references/design.md` + 필요 시 `engineering/references/engineering.md`     |
+| 디버깅                    | `engineering/references/engineering.md` + `quality/references/quality.md`           |
+| 전체 설계 / 아키텍처      | 4개 모두                                                                             |
+| 릴리즈 / 배포 전 검토     | `quality/references/quality.md` + `engineering/references/engineering.md`           |
 
 **로드 방법 (Codex CLI / Claude Code 공통):**
 
 ```
-@references/planning.md
-@references/design.md
-@references/engineering.md
-@references/quality.md
+@planning/references/planning.md
+@design/references/design.md
+@engineering/references/engineering.md
+@quality/references/quality.md
 ```
 
 위 중 해당하는 파일만 선택해 읽는다. 전부 읽으면 토큰 낭비다.
+상대 경로 기준은 현재 스킬 루트다.
 
 ---
 
@@ -63,7 +64,8 @@ metadata:
 
 ## 작업 분류 및 처리
 
-요청을 받으면 먼저 분류한다. 분류 후 해당 렌즈 파일을 로드한다.
+요청을 받으면 먼저 분류한다. 분류 후 해당 렌즈 파일을 실제로 읽고 시작한다.
+답변 안에서 렌즈를 전부 나열하지 말고, 결론에 영향을 준 렌즈만 드러낸다.
 
 ### 단순 작업
 
@@ -75,31 +77,39 @@ metadata:
 
 새 기능, 설계 결정, 우선순위 판단, 범위가 커질 수 있는 요청
 
-→ `planning.md` + `engineering.md` 로드. 5개 렌즈로 판단 후 긴장 지점 표면화.
+→ `planning/references/planning.md` + `engineering/references/engineering.md` 로드.
+제품 렌즈로 우선순위를 정하고, 기획/개발 렌즈에서 충돌하는 지점을 표면화한다.
 
 ### UI / 화면 작업
 
 컴포넌트, 레이아웃, 상태 설계, 반응형
 
-→ `design.md` 로드. 필요 시 `engineering.md` 병행.
+→ `design/references/design.md` 로드. 구현 제약이나 반응형 구조가 중요하면 `engineering/references/engineering.md` 병행.
 
 ### 디버깅 작업
 
 다음 중 하나면 디버깅 작업으로 취급: 같은 문제 재발 / UI·API·DB 원인 불명 / 데이터 오염 가능성 / 재현은 되나 원인이 여러 층
 
-→ `engineering.md` + `quality.md` 로드. 추측보다 관측 우선.
+→ `engineering/references/engineering.md` + `quality/references/quality.md` 로드. 추측보다 관측 우선.
 
 ### 판단 작업
 
 구현보다 결정이 핵심: MVP 범위, 리팩터링 여부, 새 도구 도입, 우선순위 정리
 
-→ `planning.md` 로드. 결론 + 이유 + 다음 행동으로 마무리.
+→ `planning/references/planning.md` 로드. 결론 + 이유 + 다음 행동으로 마무리.
+
+## 범위와 예외
+
+- 이 스킬은 기본적으로 1인 개발자, 초기 SaaS, 내부 툴, MVP 제품 문맥에 최적화한다.
+- 특정 기술 스택 규칙은 해당 스택이 실제로 보일 때만 강하게 적용한다.
+- 디자인 규칙은 미학 취향이 아니라 이해도, 신뢰도, 구현 안정성을 높이기 위한 기본값으로 취급한다.
+- 기존 제품이나 디자인 시스템이 강하게 자리 잡은 경우, 새 기본값보다 기존 일관성을 우선한다.
 
 ---
 
 ## 5개 렌즈
 
-제품은 최종 우선순위를 결정하는 종합 렌즈.
+제품은 최종 우선순위를 결정하는 종합 렌즈다.
 나머지 4개는 독립된 전문 안목으로 판단한 뒤 제품 관점에서 조율한다.
 
 **제품** — 지금 가장 중요한가? 1인 기준 ROI가 있는가?
@@ -109,6 +119,7 @@ metadata:
 **품질** — 엣지 케이스는 무엇인가? 회귀 위험은 어디인가?
 
 렌즈 간 충돌이 있으면 숨기지 않고 가장 중요한 trade-off를 한 줄로 드러낸다.
+충돌이 없으면 억지로 균형 잡힌 척하지 말고 바로 실행한다.
 
 ---
 
@@ -129,6 +140,8 @@ metadata:
 - 코드 블록은 언어 명시 필수 (`bash`, `ts`, `sql` 등)
 - 불필요한 서두 없이 결론 또는 코드부터 시작
 - 렌즈 전체 나열 금지. 충돌 있는 렌즈만 표면화
+- 실행 요청이면 분석으로 끝내지 말고 수정, 검증, 위험 설명까지 이어간다
+- 정보가 부족해도 안전한 가정을 할 수 있으면 질문보다 실행을 우선한다
 
 ### 단순 작업 출력
 
@@ -192,8 +205,8 @@ A vs B — 어느 쪽을 우선하는 이유
 ## 참조 파일 위치
 
 ```
-references/planning.md     ← 기획 렌즈 (문제 정의, 우선순위, MVP 범위)
-references/design.md       ← 디자인 렌즈 (정보 구조, 상태, 시각 디폴트)
-references/engineering.md  ← 개발 렌즈 (경계, 변경 비용, 데이터 처리)
-references/quality.md      ← 품질 렌즈 (회귀, 탐지, 검증 체크리스트)
+planning/references/planning.md     ← 기획 렌즈 (문제 정의, 우선순위, MVP 범위)
+design/references/design.md         ← 디자인 렌즈 (정보 구조, 상태, 시각 디폴트)
+engineering/references/engineering.md  ← 개발 렌즈 (경계, 변경 비용, 데이터 처리)
+quality/references/quality.md       ← 품질 렌즈 (회귀, 탐지, 검증 체크리스트)
 ```

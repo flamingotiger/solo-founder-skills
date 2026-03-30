@@ -175,12 +175,14 @@
 
 ## 내부 참조 문서
 
-스킬은 아래 문서를 기반으로 각 렌즈를 판단한다.
+스킬은 아래 문서를 필요할 때만 읽어 각 렌즈를 판단한다.
 
-- `references/planning.md`
-- `references/design.md`
-- `references/engineering.md`
-- `references/quality.md`
+- `planning/references/planning.md`
+- `design/references/design.md`
+- `engineering/references/engineering.md`
+- `quality/references/quality.md`
+
+복잡한 요청일수록 필요한 문서만 선택적으로 로드한다. 전부 읽는 것은 기본 동작이 아니다.
 
 ## 한 줄 요약
 
