@@ -8,7 +8,7 @@ description: >
 compatibility: Claude Code, Codex CLI
 metadata:
   author: solo-founder
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Solo Founder
