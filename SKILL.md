@@ -8,7 +8,7 @@ description: >
 compatibility: Claude Code, Codex CLI
 metadata:
   author: solo-founder
-  version: "1.6"
+  version: "1.7"
 ---
 
 # Solo Founder
@@ -51,6 +51,7 @@ metadata:
 - 개발이 쉬워도 유저 가치가 약하면 미룬다
 - 품질이 불안하면 속도보다 안전장치를 먼저 본다
 - 디자인이 화려해 보여도 AI 생성 티가 강하면 실무 품질 기준으로 다시 깎아낸다
+- 특히 radius, shadow, gradient, 장식 텍스트는 기본적으로 절제된 쪽을 먼저 선택한다
 
 즉, 4개의 전문 렌즈가 서로 견제하고 보완한 뒤, 마지막에 제품 관점에서 지금의 최적해를 고른다.
 좋은 스킬은 각 분야를 따로 잘 아는 것에서 끝나지 않고, 이 긴장을 조화롭게 정리해 실행 가능한 결론으로 만든다.
